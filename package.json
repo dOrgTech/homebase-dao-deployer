@@ -13,7 +13,8 @@
     "lint:ci": "eslint --color 'src/**/*.{js,jsx,ts,tsx}'",
     "lint:check": "eslint --quiet 'src/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "tsc && tspath -f"
   },
   "dependencies": {
     "@airgap/beacon-sdk": "^3.3.0",
@@ -43,10 +44,12 @@
     "blockies-ts": "^1.0.0",
     "body-parser": "^1.20.2",
     "browserify-zlib": "^0.2.0",
+    "connect-timeout": "^1.9.0",
     "cors": "^2.8.5",
     "crypto-browserify": "^3.12.0",
     "dayjs": "^1.10.4",
     "express": "^4.18.2",
+    "express-queue": "^0.0.13",
     "fetch-node": "0.0.1",
     "formik": "^2.2.6",
     "formik-material-ui": "^3.0.1",

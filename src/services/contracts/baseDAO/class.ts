@@ -112,7 +112,7 @@ export abstract class BaseDAO {
       console.log("Waiting for confirmation on DAO contract...", t)
       const { address } = await operation.contract()
 
-      return await tezos.wallet.at(address)
+      return tezos.wallet.at(address)
     } catch (e) {
       console.log("error ", e)
       throw new Error("Error deploying DAO")
@@ -122,7 +122,7 @@ export abstract class BaseDAO {
   public static transfer_ownership = async (newOwner: string, address: string, tezos: TezosToolkit) => {
     const contract = await getContract(tezos, address)
 
-    return await contract.methods.transfer_ownership(newOwner).send()
+    return contract.methods.transfer_ownership(newOwner).send()
   }
 
   protected constructor(public data: BaseDAOData) {}

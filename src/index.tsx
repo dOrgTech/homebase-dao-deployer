@@ -11,6 +11,8 @@ import { BaseDAO } from "./services/contracts/baseDAO"
 import { InMemorySigner } from "@taquito/signer"
 import { EnvKey, getEnv } from "services/config"
 import cors from "cors"
+import timeout from "connect-timeout" //express v4
+import queue from "express-queue"
 
 // BigNumber.config({ DECIMAL_PLACES:  })
 
@@ -31,6 +33,10 @@ app.use(
     origin: "*"
   })
 )
+
+app.use(timeout(2147483646))
+
+app.use(queue({ activeLimit: 1, queuedLimit: -1 }))
 
 app.post("/deploy", async (req, res) => {
   try {
@@ -62,6 +68,7 @@ app.post("/deploy", async (req, res) => {
       params,
       network
     })
+    console.log("contract: ", contract)
 
     if (!contract) {
       throw new Error(`Error deploying ${template}DAO`)
