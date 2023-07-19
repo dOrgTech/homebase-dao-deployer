@@ -7,7 +7,7 @@
     "node": "16.16.0"
   },
   "scripts": {
-    "start": "tspath -f && node dist/index.js",
+    "start": "node dist/index.js",
     "dev": "concurrently \"tspath -f \" \"npx tsc --watch\" \"tspath -f \" \"nodemon -q dist/index.js\" \"tspath -f \"",
     "build": "tsc && tspath -f",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
