@@ -1,0 +1,1 @@
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});exports.GridContainer=void 0;const core_1=require('@material-ui/core');exports.GridContainer=(0,core_1.styled)(core_1.Grid)(({theme})=>({minHeight:145,borderRadius:8,cursor:'pointer',padding:'32px 46px',background:theme.palette.primary.main,[theme.breakpoints.down('sm')]:{padding:'35px 25px'}}));

@@ -1,0 +1,1 @@
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});exports.TableHeader=void 0;const core_1=require('@material-ui/core');exports.TableHeader=(0,core_1.styled)(core_1.Grid)(({theme})=>({borderBottom:`2px solid ${theme.palette.primary.light}`,paddingBottom:20}));

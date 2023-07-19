@@ -1,0 +1,1 @@
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});exports.ErrorText=void 0;const core_1=require('@material-ui/core');exports.ErrorText=(0,core_1.styled)(core_1.Typography)({fontSize:14,color:'red'});

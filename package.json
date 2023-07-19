@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "license": "MIT",
   "main": "dist/index.ts",
+  "engines": {
+    "node": "16.16.0"
+  },
   "scripts": {
     "start": "tspath -f && node dist/index.js",
     "dev": "concurrently \"tspath -f \" \"npx tsc --watch\" \"tspath -f \" \"nodemon -q dist/index.js\" \"tspath -f \"",
@@ -13,8 +16,7 @@
     "lint:ci": "eslint --color 'src/**/*.{js,jsx,ts,tsx}'",
     "lint:check": "eslint --quiet 'src/**/*.{js,jsx,ts,tsx}'",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
-    "prepare": "husky install",
-    "postinstall": "tsc && tspath -f"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@airgap/beacon-sdk": "^3.3.0",

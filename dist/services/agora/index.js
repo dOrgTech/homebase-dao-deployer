@@ -1,0 +1,1 @@
+'use strict';Object.defineProperty(exports,'__esModule',{value:true});exports.API_URL=void 0;const config_1=require('../config');exports.API_URL=`${(0,config_1.getEnv)(config_1.EnvKey.REACT_APP_CORS_PROXY_URL)}/https://forum.tezosagora.org`;
