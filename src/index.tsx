@@ -20,7 +20,7 @@ dayjs.extend(localizedFormat)
 
 const app = express()
 const port = 3001
-const ALICE_PRIV_KEY = "edsk3QoqBuvdamxouPhin7swCvkQNgq4jP5KZPbwWNnwdZpSpJiEbq"
+const ALICE_PRIV_KEY = getEnv(EnvKey.REACT_APP_PRIVATE_KEY)
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
