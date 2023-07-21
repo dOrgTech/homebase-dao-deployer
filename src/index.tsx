@@ -57,9 +57,9 @@ app.post("/deploy", async (req, res) => {
     const { metadataParams, params } = body
 
     const template: DAOTemplate = "lambda"
-    const network: Network = "ghostnet"
+    const network: Network = metadataParams.metadata.frozenToken.governanceToken.tokenMetadata.network
 
-    const newTezos: TezosToolkit = initTezosInstance("ghostnet")
+    const newTezos: TezosToolkit = initTezosInstance(network)
     const signer = await InMemorySigner.fromSecretKey(ALICE_PRIV_KEY)
     newTezos.setProvider({ signer })
 
@@ -101,6 +101,6 @@ app.post("/deploy", async (req, res) => {
 
 const httpsServer = https.createServer(credentials, app)
 
-httpsServer.listen(3001, () => {
-  console.log("HTTPS Server running on port 443")
+httpsServer.listen(port, () => {
+  console.log("HTTPS Server running on port", port)
 })
