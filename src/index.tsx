@@ -41,9 +41,9 @@ app.use(timeout(2147483646))
 app.use(queue({ activeLimit: 1, queuedLimit: -1 }))
 
 // Certificate
-const privateKey = fs.readFileSync("~/live/deploy.tezos-homebase.io/privkey.pem", "utf8")
-const certificate = fs.readFileSync("~/live/deploy.tezos-homebase.io/cert.pem", "utf8")
-const ca = fs.readFileSync("~/live/deploy.tezos-homebase.io/chain.pem", "utf8")
+const privateKey = fs.readFileSync("privkey.pem", "utf8")
+const certificate = fs.readFileSync("cert.pem", "utf8")
+const ca = fs.readFileSync("chain.pem", "utf8")
 
 const credentials = {
   key: privateKey,
