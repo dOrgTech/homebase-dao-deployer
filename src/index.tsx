@@ -30,7 +30,7 @@ app.use(bodyParser.json())
 
 app.use(
   cors({
-    origin: "*"
+    origin: ["https://tezos-homebase.io", "https://deploy-preview-609--tezos-homebase.netlify.app"]
   })
 )
 
