@@ -13,6 +13,8 @@ import { EnvKey, getEnv } from "services/config"
 import cors from "cors"
 import timeout from "connect-timeout" //express v4
 import queue from "express-queue"
+import fs from "fs"
+import https from "https"
 
 // BigNumber.config({ DECIMAL_PLACES:  })
 
@@ -37,6 +39,17 @@ app.use(
 app.use(timeout(2147483646))
 
 app.use(queue({ activeLimit: 1, queuedLimit: -1 }))
+
+// Certificate
+const privateKey = fs.readFileSync("/etc/letsencrypt/live/deploy.tezos-homebase.io/privkey.pem", "utf8")
+const certificate = fs.readFileSync("/etc/letsencrypt/live/deploy.tezos-homebase.io/cert.pem", "utf8")
+const ca = fs.readFileSync("/etc/letsencrypt/live/deploy.tezos-homebase.io/chain.pem", "utf8")
+
+const credentials = {
+  key: privateKey,
+  cert: certificate,
+  ca: ca
+}
 
 app.post("/deploy", async (req, res) => {
   try {
@@ -86,6 +99,8 @@ app.post("/deploy", async (req, res) => {
   }
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+const httpsServer = https.createServer(credentials, app)
+
+httpsServer.listen(3001, () => {
+  console.log("HTTPS Server running on port 443")
 })
