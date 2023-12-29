@@ -2,8 +2,6 @@ import dayjs from "dayjs"
 import localizedFormat from "dayjs/plugin/localizedFormat"
 import express from "express"
 import bodyParser from "body-parser"
-import { DAOTemplate } from "./modules/creator/state"
-import { Network } from "./services/beacon"
 import { initTezosInstance } from "./services/beacon/hooks/useTezos"
 import { TezosToolkit } from "@taquito/taquito"
 import { deployMetadataCarrier } from "./services/contracts/metadataCarrier/deploy"
@@ -17,6 +15,9 @@ import fs from "fs"
 import https from "https"
 
 // BigNumber.config({ DECIMAL_PLACES:  })
+
+type DAOTemplate = "lambda" | "lite" | ""
+type Network = "mainnet" | "ghostnet"
 
 dayjs.extend(localizedFormat)
 
