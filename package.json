@@ -30,7 +30,6 @@
     "express-queue": "^0.0.13",
     "graphql": "^15.5.1",
     "graphql-request": "^3.4.0",
-    "launchdarkly-react-client-sdk": "2.27.0",
     "node-fetch": "^3.3.2",
     "resolve-tspaths": "^0.8.17"
   },

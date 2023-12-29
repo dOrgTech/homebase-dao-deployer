@@ -20,17 +20,7 @@ jobs:
         with:
           node-version: '${{ steps.nvm.outputs.NVMRC }}'
 
-      # - name: Check for cached node_modules
-      #   uses: actions/cache@v2
-      #   id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-      #   with:
-      #     path: |
-      #       node_modules
-      #       */*/node_modules
-      #     key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
-
       - name: Install dependencies
-        # if: steps.cache-deps.outputs.cache-hit != 'true'
         run: yarn cache clean --all && yarn install --nonInteractive --frozen-lockfile
 
       - name: Lint
@@ -38,7 +28,3 @@ jobs:
 
       - name: Build
         run: yarn run build
-
-      # TO-DO: Uncomment when tests are ready to be run on CI (such as those in issues #129-#131)
-      # - name: Test
-      #  run: yarn test:ci
