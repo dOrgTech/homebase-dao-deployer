@@ -94,6 +94,8 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
+    "@types/connect-timeout": "^0.0.39",
+    "@types/cors": "^2.8.17",
     "@types/jest": "^26.0.21",
     "@types/node": "^14.14.35",
     "@types/react": "^17.0.3",

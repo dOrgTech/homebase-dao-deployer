@@ -3,6 +3,8 @@ import localizedFormat from "dayjs/plugin/localizedFormat"
 import express from "express"
 import bodyParser from "body-parser"
 import { initTezosInstance } from "./services/beacon/hooks/useTezos"
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { TezosToolkit } from "@taquito/taquito"
 import { deployMetadataCarrier } from "./services/contracts/metadataCarrier/deploy"
 import { BaseDAO } from "./services/contracts/baseDAO"
@@ -13,11 +15,10 @@ import timeout from "connect-timeout" //express v4
 import queue from "express-queue"
 import fs from "fs"
 import https from "https"
+import { DAOTemplate } from "services/contracts/baseDAO/state"
+import { Network } from "services/beacon"
 
 // BigNumber.config({ DECIMAL_PLACES:  })
-
-type DAOTemplate = "lambda" | "lite" | ""
-type Network = "mainnet" | "ghostnet"
 
 dayjs.extend(localizedFormat)
 

@@ -1,10 +1,8 @@
 import { ContractAbstraction, TezosToolkit, TransactionWalletOperation, Wallet } from "@taquito/taquito"
-import { DAOTemplate, MigrationParams } from "modules/creator/state"
 import { Network } from "services/beacon"
 import { ConfigProposalParams, fromStateToBaseStorage, getContract } from "."
 import { MetadataDeploymentResult } from "../metadataCarrier/deploy"
 import { generateStorageContract } from "services/baseDAODocker"
-import baseDAOContractCode from "./michelson/baseDAO"
 import lambdaDAOContractCode from "./michelson/lambdaDAO"
 import { formatUnits, xtzToMutez } from "../utils"
 import { BigNumber } from "bignumber.js"
@@ -16,6 +14,7 @@ import { Schema } from "@taquito/michelson-encoder"
 import configuration_type_michelson from "./lambdaDAO/michelson/supported_lambda_types/configuration_proposal_type.json"
 import proposelambda from "./lambdaDAO/michelson/proposelambda"
 import { getNetworkHead } from "services/bakingBad/stats"
+import { DAOTemplate, MigrationParams } from "services/contracts/baseDAO/state"
 
 interface DeployParams {
   params: MigrationParams
@@ -70,7 +69,7 @@ export interface BaseDAOData {
 
 export abstract class BaseDAO {
   public static baseDeploy = async (
-    template: DAOTemplate,
+    template: "lambda" | "lite" | "",
     { params, metadata, tezos, network }: DeployParams
   ): Promise<ContractAbstraction<Wallet>> => {
     const treasuryParams = fromStateToBaseStorage(params)
