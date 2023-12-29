@@ -26,5 +26,8 @@ yarn-error.log*
 .vscode
 
 .idea
-.env.example
 
+# Certificate files
+privkey.pem
+cert.pem
+chain.pem
