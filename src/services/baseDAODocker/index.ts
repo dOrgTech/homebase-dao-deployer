@@ -1,5 +1,5 @@
 import { Network } from "services/beacon"
-import { DAOTemplate } from "modules/creator/state"
+import { DAOTemplate } from "services/contracts/baseDAO/state"
 import { BaseStorageParams } from "services/contracts/baseDAO"
 import { MetadataDeploymentResult } from "services/contracts/metadataCarrier/deploy"
 import { storageParamsToBaseDAODockerArgs } from "./mappers"

@@ -1,5 +1,4 @@
 import BigNumber from "bignumber.js"
-import { Token } from "models/Token"
 import { useState, useContext, useEffect, useMemo } from "react"
 import { useQuery } from "react-query"
 import { TZKTSubscriptionsContext } from "services/bakingBad/context/TZKTSubscriptions"
@@ -11,9 +10,7 @@ import { LambdaDAO } from "services/contracts/baseDAO/lambdaDAO"
 import { parseUnits } from "services/contracts/utils"
 import { getDAO } from "services/services/dao/services"
 import { useBlockchainInfo } from "../../../contracts/baseDAO/hooks/useBlockchainInfo"
-import { useCommunityForContract } from "modules/lite/explorer/hooks/useCommunityForContract"
 import { fetchLiteData } from "services/services/lite/lite-services"
-import { Community } from "services/services/types"
 
 export const useDAO = (address: string) => {
   const [cycleInfo, setCycleInfo] = useState<CycleInfo>()

@@ -2,7 +2,7 @@ import { ContractAbstraction, TezosToolkit, Wallet } from "@taquito/taquito"
 
 import { MetadataCarrierDeploymentData, MetadataCarrierParameters } from "services/contracts/metadataCarrier/types"
 import { BigNumber } from "bignumber.js"
-import { MigrationParams } from "modules/creator/state"
+import { MigrationParams } from "services/contracts/baseDAO/state"
 import { Token as TokenModel } from "models/Token"
 
 export type Contract = ContractAbstraction<Wallet> | undefined

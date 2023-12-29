@@ -1,4 +1,4 @@
-import { DAOTemplate } from "../../../modules/creator/state/types"
+import { DAOTemplate } from "services/contracts/baseDAO/state"
 export interface FA2TokenMetadata {
   name: string
   symbol: string

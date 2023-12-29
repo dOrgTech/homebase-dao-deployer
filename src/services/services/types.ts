@@ -1,7 +1,7 @@
 import BigNumber from "bignumber.js"
-import { DAOTemplate } from "modules/creator/state"
 import { Network } from "services/beacon"
 import { IndexerStatus } from "./dao/mappers/proposal/types"
+import { DAOTemplate } from "services/contracts/baseDAO/state"
 
 export interface DAOTypeDTO {
   id: number
