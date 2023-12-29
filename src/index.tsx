@@ -15,8 +15,12 @@ import timeout from "connect-timeout" //express v4
 import queue from "express-queue"
 import fs from "fs"
 import https from "https"
+import http from "http"
 import { DAOTemplate } from "services/contracts/baseDAO/state"
 import { Network } from "services/beacon"
+// Swagger
+import swaggerUi from "swagger-ui-express"
+import swaggerJSDoc from "swagger-jsdoc"
 
 // BigNumber.config({ DECIMAL_PLACES:  })
 
@@ -24,6 +28,31 @@ dayjs.extend(localizedFormat)
 
 const app = express()
 const port = 3001
+
+// Swagger definition
+const swaggerDefinition = {
+  openapi: "3.0.0",
+  info: {
+    title: "Homebase DAO Deployer API Documentation",
+    version: "1.0.0",
+    description: "API documentation for the Homebase DAO Deployer"
+  },
+  servers: [
+    {
+      url: `http://localhost:${port}`,
+      description: "Local server"
+    }
+  ]
+}
+const options = {
+  swaggerDefinition,
+  // Pointing to the current file for API definitions
+  apis: ["./dist/index.js"]
+}
+const swaggerSpec = swaggerJSDoc(options)
+// Swagger UI route
+app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+
 const ALICE_PRIV_KEY = getEnv(EnvKey.REACT_APP_PRIVATE_KEY)
 
 // parse application/x-www-form-urlencoded
@@ -42,18 +71,29 @@ app.use(timeout(2147483646))
 
 app.use(queue({ activeLimit: 1, queuedLimit: -1 }))
 
-// Certificate
-const privateKey = fs.readFileSync("privkey.pem", "utf8")
-const certificate = fs.readFileSync("cert.pem", "utf8")
-const ca = fs.readFileSync("chain.pem", "utf8")
-
-const credentials = {
-  key: privateKey,
-  cert: certificate,
-  ca: ca
-}
-
 app.post("/deploy", async (req, res) => {
+  /**
+   * @swagger
+   * /deploy:
+   *   post:
+   *     summary: Deploy a new DAO
+   *     description: Deploy a new DAO on the Tezos blockchain.
+   *     requestBody:
+   *       required: true
+   *       content:
+   *         application/json:
+   *           schema:
+   *             type: object
+   *             properties:
+   *               deployParams:
+   *                 type: object
+   *                 description: Deployment parameters for the DAO.
+   *     responses:
+   *       200:
+   *         description: DAO deployed successfully. Returns the contract address.
+   *       500:
+   *         description: Error in deploying DAO.
+   */
   try {
     const body = req.body.deployParams
     const { metadataParams, params } = body
@@ -101,8 +141,23 @@ app.post("/deploy", async (req, res) => {
   }
 })
 
-const httpsServer = https.createServer(credentials, app)
+// Check the environment and setup the corresponding server
+if (getEnv(EnvKey.REACT_APP_ENV) !== "LOCAL") {
+  // Production setup with HTTPS
+  const credentials = {
+    key: fs.readFileSync("path/to/privkey.pem", "utf8"),
+    cert: fs.readFileSync("path/to/cert.pem", "utf8"),
+    ca: fs.readFileSync("path/to/chain.pem", "utf8") // Include this only if you have a CA file
+  }
 
-httpsServer.listen(port, () => {
-  console.log("HTTPS Server running on port", port)
-})
+  const httpsServer = https.createServer(credentials, app)
+  httpsServer.listen(port, () => {
+    console.log("HTTPS Server running on port", port)
+  })
+} else {
+  // Local development setup with HTTP
+  const httpServer = http.createServer(app)
+  httpServer.listen(port, () => {
+    console.log("HTTP Server running on port", port)
+  })
+}

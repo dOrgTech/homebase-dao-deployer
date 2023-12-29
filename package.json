@@ -33,7 +33,9 @@
     "graphql": "^15.5.1",
     "graphql-request": "^3.4.0",
     "node-fetch": "2",
-    "resolve-tspaths": "^0.8.17"
+    "resolve-tspaths": "^0.8.17",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
     "@types/connect-timeout": "^0.0.39",
