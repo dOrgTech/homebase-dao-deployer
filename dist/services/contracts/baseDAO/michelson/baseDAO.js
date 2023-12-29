@@ -1,4 +1,6 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});exports.default=`parameter
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = `parameter
   (or (or (or (or (unit %accept_ownership) (pair %callCustom string bytes))
               (or (unit %default)
                   (pair %propose (address %from) (pair (nat %frozen_token) (bytes %proposal_metadata)))))
@@ -2427,3 +2429,4 @@ code { PUSH nat 1000000 ;
        SWAP ;
        PAIR } 
 `;
+//# sourceMappingURL=baseDAO.js.map

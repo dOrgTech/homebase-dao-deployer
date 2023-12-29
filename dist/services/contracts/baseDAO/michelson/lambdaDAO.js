@@ -1,4 +1,6 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});exports.default=`parameter
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = `parameter
 (or (or (or (or (or (unit %accept_ownership) (unit %default))
                 (or (pair %propose (address %from) (nat %frozen_token) (bytes %proposal_metadata))
                     (pair %transfer_contract_tokens
@@ -2936,3 +2938,4 @@ code { LAMBDA
                   SWAP ;
                   PAIR } } } } 
 `;
+//# sourceMappingURL=lambdaDAO.js.map

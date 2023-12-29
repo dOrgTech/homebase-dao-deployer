@@ -1,1 +1,0 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});exports.HeroTitle=void 0;const core_1=require('@material-ui/core');exports.HeroTitle=(0,core_1.styled)(core_1.Typography)(({theme})=>({fontSize:30,fontWeight:500,color:theme.palette.text.primary,lineHeight:0.8,marginBottom:'9px',['@media (max-width:1030px)']:{fontSize:25}}));

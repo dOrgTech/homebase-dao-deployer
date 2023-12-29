@@ -1,4 +1,6 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});exports.default=`(or (or (or (pair %configuration_proposal
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = `(or (or (or (pair %configuration_proposal
                                                         (pair (pair (option %frozen_extra_value nat) (option %frozen_scale_value nat))
                                                               (pair (option %max_proposal_size nat) (option %slash_division_value nat)))
                                                         (option %slash_scale_value nat))
@@ -15,3 +17,4 @@
                                              (or %update_receivers_proposal
                                                 (list %add_receivers address)
                                                 (list %remove_receivers address)))`;
+//# sourceMappingURL=propose.js.map

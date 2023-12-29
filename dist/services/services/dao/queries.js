@@ -1,4 +1,8 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});exports.GET_XTZ_TRANSFERS=exports.GET_PROPOSAL_QUERY=exports.GET_PROPOSALS_QUERY=exports.GET_DAO_QUERY=exports.GET_DAOS_QUERY_V2=exports.GET_DAOS_QUERY=void 0;const graphql_request_1=require('graphql-request');exports.GET_DAOS_QUERY=(0,graphql_request_1.gql)`
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.GET_XTZ_TRANSFERS = exports.GET_PROPOSAL_QUERY = exports.GET_PROPOSALS_QUERY = exports.GET_DAO_QUERY = exports.GET_DAOS_QUERY_V2 = exports.GET_DAOS_QUERY = void 0;
+const graphql_request_1 = require("graphql-request");
+exports.GET_DAOS_QUERY = (0, graphql_request_1.gql) `
   query getDaos($network: String!) {
     daos(where: { network: { _eq: $network } }) {
       dao_type {
@@ -33,7 +37,8 @@
       }
     }
   }
-`;exports.GET_DAOS_QUERY_V2=(0,graphql_request_1.gql)`
+`;
+exports.GET_DAOS_QUERY_V2 = (0, graphql_request_1.gql) `
   query getDaos($network: String!) {
     daos(where: { network: { _eq: $network } }) {
       dao_type {
@@ -68,7 +73,8 @@
       }
     }
   }
-`;exports.GET_DAO_QUERY=(0,graphql_request_1.gql)`
+`;
+exports.GET_DAO_QUERY = (0, graphql_request_1.gql) `
   query getDao($address: String!) {
     daos(where: { address: { _eq: $address } }) {
       dao_type {
@@ -146,7 +152,8 @@
       }
     }
   }
-`;exports.GET_PROPOSALS_QUERY=(0,graphql_request_1.gql)`
+`;
+exports.GET_PROPOSALS_QUERY = (0, graphql_request_1.gql) `
   query getDao($address: String!) {
     daos(where: { address: { _eq: $address } }) {
       proposals {
@@ -188,7 +195,8 @@
       }
     }
   }
-`;exports.GET_PROPOSAL_QUERY=(0,graphql_request_1.gql)`
+`;
+exports.GET_PROPOSAL_QUERY = (0, graphql_request_1.gql) `
   query getDao($address: String!, $proposalKey: String!) {
     daos(where: { _and: { address: { _eq: $address } } }) {
       proposals(where: { key: { _eq: $proposalKey } }) {
@@ -230,7 +238,8 @@
       }
     }
   }
-`;exports.GET_XTZ_TRANSFERS=(0,graphql_request_1.gql)`
+`;
+exports.GET_XTZ_TRANSFERS = (0, graphql_request_1.gql) `
   query getTransfers($address: String!) {
     transfer(where: { dao: { address: { _eq: $address } } }) {
       decimal_amount
@@ -241,3 +250,4 @@
     }
   }
 `;
+//# sourceMappingURL=queries.js.map

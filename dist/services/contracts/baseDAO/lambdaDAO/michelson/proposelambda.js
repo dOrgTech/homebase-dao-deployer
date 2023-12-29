@@ -1,4 +1,6 @@
-'use strict';Object.defineProperty(exports,'__esModule',{value:true});exports.default=`(or (or (pair %add_handler
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = `(or (or (pair %add_handler
       (pair (lambda %code
               (pair (pair (map %handler_storage string bytes) (bytes %packed_argument))
                     (pair %proposal_info
@@ -11,3 +13,4 @@
       (string %name))
     (pair %execute_handler (string %handler_name) (bytes %packed_argument)))
     (string %remove_handler))`;
+//# sourceMappingURL=proposelambda.js.map
