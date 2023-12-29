@@ -1,5 +1,5 @@
 import { BigNumber } from "bignumber.js"
-import { LambdaCode } from "services/bakingBad/lambdas"
+import { LambdaCode } from "services/bakingBad/lambdas/types"
 import { Extra, TransferParams } from ".."
 
 export interface RegistryItem {

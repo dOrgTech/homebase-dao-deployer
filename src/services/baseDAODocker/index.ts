@@ -44,7 +44,7 @@ export const generateStorageContract = async ({
     throw new Error("Failed to make DAO Storage contract from BaseDAO-Dockerized API")
   }
 
-  const result: BaseDAODockerContractsDTO = await response.json()
+  const result: BaseDAODockerContractsDTO = (await response.json()) as BaseDAODockerContractsDTO
 
   return result.storage
 }

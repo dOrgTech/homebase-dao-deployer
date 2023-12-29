@@ -15,4 +15,4 @@ deploy:
   app:
     develop: homebase-dapp-staging
     master: homebase-dapp-production
-  skip_cleanup: 'true'
+  skip_cleanup: true
