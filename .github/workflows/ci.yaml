@@ -1,6 +1,12 @@
 name: continuous-integration
 
-on: [push, pull_request]
+on:
+  push:
+    branches-ignore: 
+      - '**/pull/**' # Ignores branches that are created for pull requests
+  pull_request:
+    branches:
+      - '**' # Runs for pull requests targeting any branch
 
 jobs:
   CI:
