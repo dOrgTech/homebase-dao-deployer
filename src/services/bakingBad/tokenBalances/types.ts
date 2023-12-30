@@ -40,18 +40,6 @@ export interface NFTDTO {
   standard: string
 }
 
-export interface BalanceTZKT {
-  id: number
-  account: Account
-  token: Token
-  balance: string
-  transfersCount: number
-  firstLevel: number
-  firstTime: string
-  lastLevel: number
-  lastTime: string
-}
-
 export interface Account {
   alias: string
   address: string

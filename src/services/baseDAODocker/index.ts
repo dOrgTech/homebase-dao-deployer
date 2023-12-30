@@ -1,12 +1,12 @@
 import { Network } from "services/beacon"
-import { DAOTemplate } from "modules/creator/state"
+import { DAOTemplate } from "services/contracts/baseDAO/state"
 import { BaseStorageParams } from "services/contracts/baseDAO"
 import { MetadataDeploymentResult } from "services/contracts/metadataCarrier/deploy"
 import { storageParamsToBaseDAODockerArgs } from "./mappers"
 import { GeneratorArgs, BaseDAODockerContractsDTO } from "./types"
 import { getTokenMetadata } from "services/bakingBad/tokenBalances"
 import { EnvKey, getEnv } from "services/config"
-import fetch from "node-fetch";
+import fetch from "node-fetch"
 
 export const API_URL = getEnv(EnvKey.REACT_APP_BASEDAO_DOCKERISED_URL)
 
@@ -44,7 +44,7 @@ export const generateStorageContract = async ({
     throw new Error("Failed to make DAO Storage contract from BaseDAO-Dockerized API")
   }
 
-  const result: BaseDAODockerContractsDTO = await response.json()
+  const result: BaseDAODockerContractsDTO = (await response.json()) as BaseDAODockerContractsDTO
 
   return result.storage
 }

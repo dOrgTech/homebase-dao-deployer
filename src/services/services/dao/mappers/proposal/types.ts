@@ -8,7 +8,6 @@ import { ProposalDTO } from "services/services/types"
 import { extractTransfersData } from "."
 import { bytes2Char } from "@taquito/tzip16"
 import { BaseDAO } from "services/contracts/baseDAO"
-import { DAOTemplate } from "modules/creator/state"
 import transfer_arg_type_michelson from "../../../../contracts/baseDAO/lambdaDAO/michelson/supported_lambda_types/transfer_proposal_type.json"
 import transfer_proposal_type_before_fa12 from "../../../../contracts/baseDAO/lambdaDAO/michelson/supported_lambda_types/transfer_proposal_type_before_fa1.2.json"
 import update_contract_delegate_type_michelson from "../../../../contracts/baseDAO/lambdaDAO/michelson/supported_lambda_types/update_contract_delegate_proposal.json"
@@ -16,6 +15,7 @@ import update_guardian_type_michelson from "../../../../contracts/baseDAO/lambda
 import configuration_proposal_type_michelson from "../../../../contracts/baseDAO/lambdaDAO/michelson/supported_lambda_types/configuration_proposal_type.json"
 import { PMLambdaProposal } from "services/contracts/baseDAO/lambdaDAO/types"
 import { HUMANITEZ_DAO } from "services/config"
+import { DAOTemplate } from "services/contracts/baseDAO/state"
 
 export enum IndexerStatus {
   CREATED = "created",

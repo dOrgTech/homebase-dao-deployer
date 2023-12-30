@@ -1,6 +1,12 @@
 name: continuous-integration
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+      - '**'
 
 jobs:
   CI:
@@ -38,7 +44,3 @@ jobs:
 
       - name: Build
         run: yarn run build
-
-      # TO-DO: Uncomment when tests are ready to be run on CI (such as those in issues #129-#131)
-      # - name: Test
-      #  run: yarn test:ci
