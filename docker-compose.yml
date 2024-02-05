@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  homebase-dao-deployer:
+    image: manjain/homebase-dao-deployer:httpsprod
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./cert.pem:/app/cert.pem
+      - ./chain.pem:/app/chain.pem
+      - ./privkey.pem:/app/privkey.pem
+    environment:
+      - REACT_APP_ENV=
+      - REACT_APP_NETWORK=
+      - REACT_APP_HASURA_URL=
+      - REACT_APP_HASURA_URL_V2=
+      - REACT_APP_HASURA_ADMIN_SECRET=
+      - REACT_APP_HASURA_ADMIN_SECRET_V2=
+      - REACT_APP_CORS_PROXY_URL=
+      - REACT_APP_MIXPANEL_TOKEN=
+      - REACT_APP_MIXPANEL_DEBUG_ENABLED=
+      - REACT_APP_LAUNCH_DARKLY_SDK_DEV=
+      - REACT_APP_LAUNCH_DARKLY_SDK_PROD=
+      - REACT_APP_BASEDAO_DOCKERISED_URL=
+      - REACT_APP_URL=
+      - REACT_APP_V2_URL=
+      - REACT_APP_LITE_API_URL=
+      - REACT_APP_PRIVATE_KEY=
