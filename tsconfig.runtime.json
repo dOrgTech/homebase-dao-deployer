@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "dist",
+    "paths": {
+      "*": ["../node_modules/*"],
+      "services/*": ["services/*"],
+      "services/beacon": ["services/beacon"],
+      "modules/*": ["modules/*"],
+      "theme/*": ["theme/*"],
+      "assets/*": ["assets/*"],
+      "models/*": ["models/*"],
+      "src/*": ["src/*"],
+      "utils": ["utils"]
+    }
+  }
+}

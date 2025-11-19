@@ -28,3 +28,7 @@ yarn-error.log*
 .idea
 .env.example
 
+dist/
+dist/*
+certs/
+env.yaml

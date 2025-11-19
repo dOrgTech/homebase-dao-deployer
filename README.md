@@ -10,7 +10,7 @@ The following dependencies are required to run homebase-app:
 
 | Dependency | Version             |
 | ---------- | ------------------- |
-| Node       | `v16.16.0` or above |
+| Node       | `v22.x` or above    |
 | Yarn       | `v1.22.*` or above  |
 
 # Third Party Services

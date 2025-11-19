@@ -1,3 +1,6 @@
+import 'dotenv/config'
+// Resolve TS path aliases at runtime when running compiled JS
+import 'tsconfig-paths/register'
 import dayjs from "dayjs"
 import localizedFormat from "dayjs/plugin/localizedFormat"
 import express from "express"
@@ -40,28 +43,65 @@ app.use(timeout(2147483646))
 
 app.use(queue({ activeLimit: 1, queuedLimit: -1 }))
 
-// Certificate
-const privateKey = fs.readFileSync("privkey.pem", "utf8")
-const certificate = fs.readFileSync("cert.pem", "utf8")
-const ca = fs.readFileSync("chain.pem", "utf8")
-
-const credentials = {
-  key: privateKey,
-  cert: certificate,
-  ca: ca
-}
 
 app.post("/deploy", async (req, res) => {
   try {
-    const body = req.body.deployParams
-    const { metadataParams, params } = body
+    const deployParams = req.body?.deployParams
+
+    if (!deployParams) {
+      return res.status(400).json({
+        error: "Missing body.deployParams",
+        example: {
+          deployParams: {
+            metadataParams: {
+              metadata: {
+                frozenToken: {
+                  governanceToken: { tokenMetadata: { network: "ghostnet" } }
+                }
+              }
+            },
+            params: { orgSettings: { administrator: "tz1..." } }
+          }
+        }
+      })
+    }
+
+    const { metadataParams, params } = deployParams
+
+    if (!metadataParams || !metadataParams.metadata) {
+      return res.status(400).json({
+        error: "Missing deployParams.metadataParams.metadata",
+        expectedPath: "deployParams.metadataParams.metadata.frozenToken.governanceToken.tokenMetadata.network"
+      })
+    }
 
     const template: DAOTemplate = "lambda"
-    const network: Network = metadataParams.metadata.frozenToken.governanceToken.tokenMetadata.network
+
+    const rawNetwork =
+      metadataParams?.metadata?.frozenToken?.governanceToken?.tokenMetadata?.network ||
+      req.body?.network ||
+      deployParams?.network ||
+      getEnv(EnvKey.REACT_APP_NETWORK) ||
+      "mainnet"
+
+    const normalized = String(rawNetwork).toLowerCase()
+    const network: Network = (normalized === "ghostnet" || normalized === "mainnet" ? normalized : "mainnet") as Network
 
     const newTezos: TezosToolkit = initTezosInstance(network)
+
+    if (!ALICE_PRIV_KEY) {
+      return res.status(500).json({ error: "Missing REACT_APP_PRIVATE_KEY in environment" })
+    }
+
     const signer = await InMemorySigner.fromSecretKey(ALICE_PRIV_KEY)
     newTezos.setProvider({ signer })
+
+    if (!params?.orgSettings) {
+      return res.status(400).json({
+        error: "Missing deployParams.params.orgSettings",
+        note: "orgSettings.administrator will be set to the deployer pkh"
+      })
+    }
 
     params.orgSettings.administrator = await newTezos.wallet.pkh()
 
@@ -95,12 +135,28 @@ app.post("/deploy", async (req, res) => {
     res.send({ address: contract.address })
   } catch (error) {
     console.log("error: ", error)
-    res.send("OOOppsiess")
+    res.status(500).json({ error: String(error) })
   }
 })
 
-const httpsServer = https.createServer(credentials, app)
-
-httpsServer.listen(port, () => {
-  console.log("HTTPS Server running on port", port)
+app.listen(port, () => {  
+  console.log("App Network", process.env.REACT_APP_NETWORK)
+  console.log("HTTPS Server running on port", port) 
 })
+
+// Certificate
+// const privateKey = fs.readFileSync("privkey.pem", "utf8")
+// const certificate = fs.readFileSync("cert.pem", "utf8")
+// const ca = fs.readFileSync("chain.pem", "utf8")
+
+// const credentials = {
+//   key: privateKey,
+//   cert: certificate,
+//   ca: ca
+// }
+
+// const httpsServer = https.createServer(credentials, app)
+
+// httpsServer.listen(port, () => {
+//   console.log("HTTPS Server running on port", port)
+// })
